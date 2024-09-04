@@ -15,7 +15,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "fs-extra": "^11.2.0",
@@ -28,6 +29,7 @@
     "@sequencemedia/eslint-config-standard": "^0.0.52",
     "@sequencemedia/hooks": "^1.0.543",
     "core-js": "^3.38.1",
-    "eslint": "^9.9.1"
+    "eslint": "^9.9.1",
+    "husky": "^9.1.5"
   }
 }
