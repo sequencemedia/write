@@ -1,6 +1,10 @@
 import {
-  createWriteStream
+  appendFileSync
 } from 'node:fs'
+
+import {
+  ensureFile
+} from 'fs-extra'
 
 import stripAnsi from 'strip-ansi'
 
@@ -13,27 +17,39 @@ function stack ({ stack = '' }) {
 }
 
 function writeTo (filePath, fileData) {
-  const writer = createWriteStream(filePath, { flags: 'a' })
-  writer.write(fileData)
-  writer.end()
+  ensureFile(filePath, (e) => {
+    if (!e) appendFileSync(filePath, fileData)
+  })
 }
 
 function DEFAULT_WRITE () {
   //
 }
 
-export default function getWriteFor (stream, writer = { write: DEFAULT_WRITE }, p = null) {
+/**
+ * Intercepts writes to stream `alpha` and directs them to stream `omega`
+ * before continuing with the write
+ *
+ * Any error in writes to stream `omega` can be caught and logged to
+ * the file system at path `p`
+ *
+ * @param {NodeJS.WriteStream | {write: () => void}} alpha
+ * @param {NodeJS.WriteStream | {write: () => void}} omega
+ * @param {string?} p
+ * @returns
+ */
+export default function getWriteFor (alpha, omega = { write: DEFAULT_WRITE }, p = null) {
   const {
     write = DEFAULT_WRITE
-  } = stream
+  } = alpha
 
   return function writeFor (...args) {
     try {
-      writer.write(...args.map(strip))
+      omega.write(...args.map(strip))
     } catch (e) {
       if (p) writeTo(p, stack(e)) // 🙃
     } finally {
-      write.apply(stream, args)
+      write.apply(alpha, args)
     }
   }
 }
