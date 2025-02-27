@@ -36,7 +36,7 @@ function DEFAULT_WRITE () {
  * @param {NodeJS.WriteStream | {write: () => void}} alpha
  * @param {NodeJS.WriteStream | {write: () => void}} omega
  * @param {string?} p
- * @returns
+ * @returns {(args: *[]) => void}
  */
 export default function getWriteFor (alpha, omega = { write: DEFAULT_WRITE }, p = null) {
   const {
