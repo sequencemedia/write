@@ -11,7 +11,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sequencemedia/write.git"
+    "url": "git+https://github.com/sequencemedia/write.git"
   },
   "scripts": {
     "lint": "eslint .",
