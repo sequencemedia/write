@@ -27,16 +27,16 @@ function DEFAULT_WRITE () {
 }
 
 /**
- * Intercepts writes to stream `alpha` and directs them to stream `omega`
- * before continuing with the write
+ *  Intercepts writes to stream `alpha` and directs them to stream `omega`
+ *  before continuing with the write
  *
- * Any error in writes to stream `omega` can be caught and logged to
- * the file system at path `p`
+ *  Any error in writes to stream `omega` can be caught and logged to
+ *  the file system at path `p`
  *
- * @param {NodeJS.WriteStream | {write: () => void}} alpha
- * @param {NodeJS.WriteStream | {write: () => void}} omega
- * @param {string?} p
- * @returns {(args: *[]) => void}
+ *  @param {NodeJS.WriteStream | {write: () => void}} alpha
+ *  @param {NodeJS.WriteStream | {write: () => void}} omega
+ *  @param {string?} p
+ *  @returns {(args: *[]) => void}
  */
 export default function getWriteFor (alpha, omega = { write: DEFAULT_WRITE }, p = null) {
   const {
