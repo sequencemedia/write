@@ -1,6 +1,6 @@
 # @sequencemedia/write
 
-Intercept writes to a writable stream and duplicate them on another writable stream
+Intercept writes to a writable stream and duplicates them on another writable stream
 
 ```javascript
 import {

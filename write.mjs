@@ -35,17 +35,21 @@ function DEFAULT_WRITE () {
  *
  *  @param {NodeJS.WriteStream | {write: () => void}} alpha
  *  @param {NodeJS.WriteStream | {write: () => void}} omega
+ *  @param {boolean?} s
  *  @param {string?} p
  *  @returns {(args: *[]) => void}
  */
-export default function getWriteFor (alpha, omega = { write: DEFAULT_WRITE }, p = null) {
+export default function getWriteFor (alpha, omega = { write: DEFAULT_WRITE }, s = true, p = null) {
   const {
     write = DEFAULT_WRITE
   } = alpha
 
   return function writeFor (...args) {
     try {
-      omega.write(...args.map(strip))
+      if (s) omega.write(...args.map(strip))
+      else {
+        omega.write(...args)
+      }
     } catch (e) {
       if (p) writeTo(p, stack(e)) // 🙃
     } finally {
