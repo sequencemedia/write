@@ -20,7 +20,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "fs-extra": "^11.3.2",
+    "fs-extra": "^11.3.3",
     "strip-ansi": "^7.1.2"
   },
   "devDependencies": {
