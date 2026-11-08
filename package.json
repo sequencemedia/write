@@ -1,6 +1,6 @@
 {
   "name": "@sequencemedia/write",
-  "version": "0.2.80",
+  "version": "0.2.81",
   "main": "./write.mjs",
   "type": "module",
   "types": "./write.d.mts",
